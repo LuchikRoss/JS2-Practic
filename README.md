@@ -1,2 +1,3 @@
 # JS2-Practic
-Phonebook
+
+https://luchikross.github.io/JS2-Practic/
