@@ -1,0 +1,48 @@
+{
+  "contacts": [
+    {
+      "fName": "Vitaliy",
+      "lName": "Shevchuk",
+      "telNumber": "+38073568920",
+      "eMail": "loremIpsum1@mail.ru",
+      "image": "img/photolion.jpg"
+    },
+    {
+      "fName": "Sveta",
+      "lName": "Romanova",
+      "telNumber": "0669317769",
+      "eMail": "loremIpsum2@mail.ru",
+      "image": "img/d3300.jpg"
+    },
+    {
+      "fName": "Kostya",
+      "lName": "Demin",
+      "telNumber": "38050380464",
+      "eMail": "loremIpsum3@mail.ru",
+      "image": "img/no-image.png"
+    },
+    {
+      "fName": "Roma i Lera",
+      "lName": "Onishenko",
+      "telNumber": "+380632951705",
+      "eMail": "loremIpsum4@mail.ru",
+      "image": "img/8b4e975_b.jpg"
+    }
+	,
+    {
+      "fName": "Santa",
+      "lName": "Claus",
+      "telNumber": "+01 355 45 12",
+      "eMail": "santa@gmail.com",
+      "image": "img/Santa_Claus.jpg"
+    }
+	,
+    {
+      "fName": "Valentina",
+      "lName": "Dementyeva",
+      "telNumber": "+72 480 42 07",
+      "eMail": "valekdem@rambler.ru",
+      "image": "img/y_88ab8de9.jpg"
+    }
+  ]
+  }

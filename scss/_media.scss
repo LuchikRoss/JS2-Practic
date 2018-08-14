@@ -1,0 +1,34 @@
+@media only screen and ( max-width: 1366px ) {
+  $colorBtnActive: #ff184b;
+  .contacts{
+
+  }
+  .contactsItem{
+    margin: 20px 50px 0 50px;
+    &:last-child {
+    } // last-child
+    &__img {
+      &-unactive {
+      } // -unactive
+    } // __img
+    &__descr {
+    } // __desc
+    &__price {
+      &-discount {
+        &::after {
+        } // after
+      } // -discout
+      &-unactive {
+      } // -unactive
+    } // __price
+    &__btn {
+      &:hover {
+      } // hover
+      &-unactive {
+        &:hover {
+        } // hover
+      } // -unactive
+    } // __btn
+  }//.contactsItem
+
+} // 1150

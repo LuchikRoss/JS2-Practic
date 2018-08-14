@@ -1,0 +1,19 @@
+ {
+ "employees":[
+ {
+    "name":"Vitalii",
+    "age":"23",
+    "position":"Full Stack developer"
+ },
+  {
+     "name":"Sveta",
+     "age":"24",
+     "position":"Java Game Developer"
+  },
+   {
+      "name":"Vasyl",
+      "age":"28",
+      "position":"Backend Developer"
+   }
+ ]
+ }
