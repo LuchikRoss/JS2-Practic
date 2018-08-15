@@ -9,7 +9,6 @@
 <body>
 <header>
     <wrapper>
-        <!--<h1 class="mainHeader">Телефон</h1>-->
         <div class="contactsItem__img">
             <img id="headImg" src="img/phone.png" alt="">
         </div>
@@ -19,16 +18,20 @@
     <div class="contact">
         <form class="contactForm" name="signInForm" onsubmit="return false;">
             <div class="contactFormIn">
-                <button type="button" class="contactFormBtn contactFormBtn__photo contactFormBtn__photo-unactive" title="Выбрать изображение для абонента"><i class="fas fa-camera"></i></button>
-                <input required type="text" title="" placeholder="Имя (поиск)" name="firstNameS" class="contactFormIn contactFormIn__firstName" autocomplete="off">
-                <input type="text" placeholder="Фамилия" name="lastNameS" class="contactFormIn contactFormIn__lastName contactFormIn__lastName-unactive" autocomplete="off">
-                <input type="tel" placeholder="Телефон" name="phoneNumberS" class="contactFormIn contactFormIn__phoneNumber contactFormIn__phoneNumber-unactive" autocomplete="off">
-                <input type="email" placeholder="Эл.почта" name="contactEmailS" class="contactFormIn contactFormIn__contactEmail contactFormIn__contactEmail-unactive" autocomplete="off">
+                <button type="button" class="contactFormBtn fasCamera contactFormBtn__photo" title="Выбрать изображение для абонента"><i class="fas fa-camera"></i></button>
+                <i class="fas fa-search faSearch" aria-hidden="true"></i>
+                <input required type="text" title="" placeholder="First Name" name="firstNameS" class="contactFormIn contactFormIn__firstName" autocomplete="off">
+                <!--<i class="fas fa-user-alt"></i>-->
+                <input type="text" placeholder="Last Name" name="lastNameS" class="contactFormIn contactFormIn__lastName contactFormIn__lastName-unactive" autocomplete="off">
+                <!--<i class="fas fa-phone"></i>-->
+                <input type="tel" placeholder="Phone" name="phoneNumberS" class="contactFormIn contactFormIn__phoneNumber contactFormIn__phoneNumber-unactive" autocomplete="off">
+                <!--<i class="fas fa-envelope"></i>-->
+                <input type="email" placeholder="E-mail" name="contactEmailS" class="contactFormIn contactFormIn__contactEmail contactFormIn__contactEmail-unactive" autocomplete="off">
                 <input id="photoInputButton" type="file" style="display: none;">
             </div>
 
-        <div class="contactFormBtn">
-            <button type="submit" class="contactFormBtn" title="Добавить абонента">+</button>
+        <div>
+            <button type="submit" class="contactFormBtn" title="Добавить абонента"><i class="fas fa-plus"></i></button>
             <button type="submit" class="contactFormBtn contactFormBtn__photo-unactive" title="Удалить абонента"><i class="fas fa-trash"></i></button>
         </div>
         </form>

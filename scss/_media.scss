@@ -1,10 +1,16 @@
-@media only screen and ( max-width: 1366px ) {
-  $colorBtnActive: #ff184b;
-  .contacts{
+@media only screen and ( max-width: 485px ) {
 
-  }
+  .contacts {
+    & img {
+      float: none !important;
+      margin: 0 auto;
+      text-align: center;
+    }
+    background: #151515;
+  } // contacts
+
   .contactsItem{
-    margin: 20px 50px 0 50px;
+    margin: 10px 10px 0 10px;
     &:last-child {
     } // last-child
     &__img {
@@ -29,6 +35,15 @@
         } // hover
       } // -unactive
     } // __btn
-  }//.contactsItem
+  } // contactsItem
 
-} // 1150
+} // max485px
+
+@media only screen and ( min-width: 485px ) {
+
+  .contactFormBtn-save {
+    position: absolute;
+    margin-top: -55px;
+    margin-left: 185px;
+  } // contactFormBtn-save
+}

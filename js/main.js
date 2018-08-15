@@ -1,3 +1,12 @@
+function ClickHandler(event, val) {
+    idFlight = event.target.id;
+    console.log(idFlight, val);
+    idInp = idFlight.substring(2);
+    console.log(idInp);
+    document.getElementById('d-' + idInp).innerHTML = '<button class="contactFormBtn contactFormBtn-save"><i class="far fa-save"></i></button>';
+}
+
+
 (function () {
 
     /**
@@ -11,7 +20,6 @@
 
         if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
             var response = JSON.parse(xhr.response);
-            //sessionStorage.contacts = JSON.stringify(response.contacts);
             localStorage.setItem('myStorage', JSON.stringify(response.contacts));
             console.log(response.contacts);
             viewContacts(response.contacts);
@@ -27,38 +35,54 @@
 
         var body = document.getElementsByClassName('contacts')[0];
         document.getElementsByClassName('contacts')[0].innerHTML = '';
+        var divIndex = -1;
 
         contacts.forEach(function (val) {
 
             if (val.image) {
 
+                divIndex++;
+
                 var contactsInputs = document.createElement('img');
+                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
+                contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
                 contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right;');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('ID', 'f-' + divIndex);
                 contactsInputs.setAttribute('value', val.fName);
-                contactsInputs.setAttribute('placeholder', 'Имя');
+                contactsInputs.setAttribute('placeholder', 'First Name');
+                contactsInputs.setAttribute('style', 'border-top-left-radius: 9px; border-top-right-radius: 9px;');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('ID', 'l-' + divIndex);
                 contactsInputs.setAttribute('value', val.lName);
-                contactsInputs.setAttribute('placeholder', 'Фамилия');
+                contactsInputs.setAttribute('placeholder', 'Last Name');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('ID', 'p-' + divIndex);
                 contactsInputs.setAttribute('value', val.telNumber);
-                contactsInputs.setAttribute('placeholder', 'Телефон');
+                contactsInputs.setAttribute('placeholder', 'Phone');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('ID', 'm-' + divIndex);
                 contactsInputs.setAttribute('value', val.eMail);
-                contactsInputs.setAttribute('placeholder', 'Эл.почта');
+                contactsInputs.setAttribute('placeholder', 'E-mail');
                 contactsInputs.setAttribute('style', 'margin-bottom: 30px;');
+                contactsInputs.setAttribute('style', 'border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
+                contactsInputs.setAttribute('ID', 'd-' + divIndex);
                 contactsInputs.setAttribute('style', 'display: block; clear: both; height: 20px;');
                 body.append(contactsInputs);
 
@@ -76,6 +100,7 @@
         var inputLogin = signInFormByName.getElementsByTagName('input')[0];
         var inputLoginLName = signInFormByName.getElementsByTagName('input')[1];
         var signInBtn = signInFormByName.getElementsByTagName('button')[1];
+
 
         signInBtn.addEventListener('click', function () {
 
@@ -203,9 +228,6 @@
             showFormBtns();
 
             fNameValue = signInFormByName.getElementsByTagName('input')[0].value;
-
-            //symbols = fNameValue.split(""); разбить строку на массив
-            //symbols = fNameValue.substr(0,2); // разбить строку на символы
             lengthSymbols = fNameValue.length; // количество символов в строке
 
             contacts = window.contacts;
@@ -224,7 +246,6 @@
                     addArr.telNumber = val.telNumber;
                     addArr.eMail = val.eMail;
                     addArr.image = val.image;
-                    //var vWCS = windowContactsSlice.slice(index, index + 1); //возвращает новый массив, содержащий копию части исходного массива
                     let vWCSP = vWCSPlus.concat(addArr);
                     viewContacts(vWCSP);
                     console.log(vWCSP);
@@ -312,14 +333,6 @@
                     viewContacts(vWCS);
                     console.log(vWCS);
                 }
-                else {
-                    window.dellArrLN = false;
-                    if (window.dellArrFN === false) {
-                        signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
-                        signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
-                        document.getElementById('headImg').src = 'img/phone.png';
-                    };
-                }
 
             });
 
@@ -343,6 +356,10 @@
 
 })();
 
+
+//var vWCS = windowContactsSlice.slice(index, index + 1); //возвращает новый массив, содержащий копию части исходного массива
+//symbols = fNameValue.split(""); разбить строку на массив
+//symbols = fNameValue.substr(0,2); // разбить строку на символы
 
 //let myArr = {fName: '1', lName: '2', telNumber: '3', eMail: '4', image: '5'};
 // var showPwdBtn = document.getElementById('showPwd');
