@@ -6,29 +6,31 @@ function ClickHandler(event, val) {
     idInp = idFlight.substring(2);
     document.getElementById('d-' + idInp).innerHTML = '<button class="contactFormBtn contactFormBtn-save"><i class="far fa-save"></i></button>';
     window.idInp = idInp;
-    ClickButtonContact(event);
+    ClickButtonContacts(event);
 }
 
 function ClickButtonContact(event){
-    window.contacts[idInp].eMail = document.getElementById('i-' + idInp).value;
-    window.contacts[idInp].fName = document.getElementById('f-' + idInp).value;
-    window.contacts[idInp].lName = document.getElementById('l-' + idInp).value;
-    window.contacts[idInp].telNumber = document.getElementById('p-' + idInp).value;
-    window.contacts[idInp].eMail = document.getElementById('m-' + idInp).value;
-    console.log(window.contacts);
-    localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Write Local Storage
-    console.log('Write Local Storage');
+
+    ClickButtonContacts(event);
 }
 
 
 function ClickButtonContacts(event) {
-    window.contacts[idInp].eMail = document.getElementById('i-' + idInp).value;
-    window.contacts[idInp].fName = document.getElementById('f-' + idInp).value;
-    window.contacts[idInp].lName = document.getElementById('l-' + idInp).value;
-    window.contacts[idInp].telNumber = document.getElementById('p-' + idInp).value;
-    window.contacts[idInp].eMail = document.getElementById('m-' + idInp).value;
+
+    if (Array.isArray(window.idAdressContacts) == true) {
+        idInpNew = window.idAdressContacts[idInp];
+        console.log(window.idAdressContacts[idInp]);
+    }
+    else {
+        idInpNew = idInp;
+    }
+    window.contacts[idInpNew].eMail = document.getElementById('i-' + idInp).value;
+    window.contacts[idInpNew].fName = document.getElementById('f-' + idInp).value;
+    window.contacts[idInpNew].lName = document.getElementById('l-' + idInp).value;
+    window.contacts[idInpNew].telNumber = document.getElementById('p-' + idInp).value;
+    window.contacts[idInpNew].eMail = document.getElementById('m-' + idInp).value;
     console.log(window.contacts);
-    localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Write Local Storage
+
     console.log('Write Local Storage');
     document.getElementById('d-' + idInp).innerHTML = '';
 }
@@ -113,7 +115,7 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
-                contactsInputs.setAttribute('onclick', 'ClickButtonContacts(event)');
+                contactsInputs.setAttribute('onclick', 'ClickButtonContact(event)');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);
                 contactsInputs.setAttribute('style', 'display: block; clear: both; height: 20px;');
                 body.append(contactsInputs);
@@ -266,11 +268,21 @@ function ClickButtonContacts(event) {
             var i = 0;
             var vWCSPlus = [{}];
 
+            var idAdress = -1;
+            var idAdressSmall = -1;
+            var idAdressContacts = [];
+
             contacts.forEach(function (val, index) {
+
+                idAdress++;
 
                 var fNameUpper = val.fName.toUpperCase();
 
                 if (fNameValue.toUpperCase() === fNameUpper.substr(0, lengthSymbols)) {
+
+                    idAdressSmall++;
+                    idAdressContacts[idAdressSmall]=idAdress;
+
                     console.log(fNameUpper);
                     let addArr = {};
                     addArr.fName = val.fName;
@@ -322,55 +334,13 @@ function ClickButtonContacts(event) {
                     signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
                     signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
                 }
-
+                window.idAdressContacts = idAdressContacts;
+                console.log(idAdressContacts);
             });
 
             console.log('поиск по имени: ', i);
 
         }); // First Name Input Change
-
-
-        inputLoginLName.addEventListener('input', function () {
-
-            console.log('input is changed');
-            showFormBtns();
-
-            lNameValue = signInFormByName.getElementsByTagName('input')[1].value;
-
-            contacts = window.contacts;
-            var i = 0;
-            contacts.forEach(function (val, index) {
-
-                if (val.lName.toUpperCase() === lNameValue.toUpperCase()) {
-
-                    let addArr = {};
-                    addArr.fName = val.fName;
-                    addArr.lName = val.lName;
-                    addArr.telNumber = val.telNumber;
-                    addArr.eMail = val.eMail;
-                    signInFormByName.getElementsByTagName('input')[0].value = val.fName;
-                    signInFormByName.getElementsByTagName('input')[1].value = val.lName;
-                    signInFormByName.getElementsByTagName('input')[2].value = val.telNumber;
-                    signInFormByName.getElementsByTagName('input')[3].value = val.eMail;
-
-                    document.getElementById('headImg').setAttribute('src', val.image);
-                    signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
-                    signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
-
-                    window.dellArr = index;
-                    console.log(addArr);
-
-                    var windowContactsSlice = window.contacts;
-                    var vWCS = windowContactsSlice.slice(index, index + 1);
-                    viewContacts(vWCS);
-                    console.log(vWCS);
-                }
-
-            });
-
-            console.log('поиск по фамилиии: ', i);
-
-        }); // Last Name Input Change
 
 
     }); // DOM Content Listener
