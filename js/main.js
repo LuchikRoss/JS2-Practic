@@ -1,9 +1,36 @@
+
+
 function ClickHandler(event, val) {
     idFlight = event.target.id;
     console.log(idFlight, val);
     idInp = idFlight.substring(2);
-    console.log(idInp);
     document.getElementById('d-' + idInp).innerHTML = '<button class="contactFormBtn contactFormBtn-save"><i class="far fa-save"></i></button>';
+    window.idInp = idInp;
+    ClickButtonContact(event);
+}
+
+function ClickButtonContact(event){
+    window.contacts[idInp].eMail = document.getElementById('i-' + idInp).value;
+    window.contacts[idInp].fName = document.getElementById('f-' + idInp).value;
+    window.contacts[idInp].lName = document.getElementById('l-' + idInp).value;
+    window.contacts[idInp].telNumber = document.getElementById('p-' + idInp).value;
+    window.contacts[idInp].eMail = document.getElementById('m-' + idInp).value;
+    console.log(window.contacts);
+    localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Write Local Storage
+    console.log('Write Local Storage');
+}
+
+
+function ClickButtonContacts(event) {
+    window.contacts[idInp].eMail = document.getElementById('i-' + idInp).value;
+    window.contacts[idInp].fName = document.getElementById('f-' + idInp).value;
+    window.contacts[idInp].lName = document.getElementById('l-' + idInp).value;
+    window.contacts[idInp].telNumber = document.getElementById('p-' + idInp).value;
+    window.contacts[idInp].eMail = document.getElementById('m-' + idInp).value;
+    console.log(window.contacts);
+    localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Write Local Storage
+    console.log('Write Local Storage');
+    document.getElementById('d-' + idInp).innerHTML = '';
 }
 
 
@@ -51,6 +78,7 @@ function ClickHandler(event, val) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
                 contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'f-' + divIndex);
                 contactsInputs.setAttribute('value', val.fName);
@@ -59,6 +87,7 @@ function ClickHandler(event, val) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
                 contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'l-' + divIndex);
                 contactsInputs.setAttribute('value', val.lName);
@@ -66,6 +95,7 @@ function ClickHandler(event, val) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
                 contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'p-' + divIndex);
                 contactsInputs.setAttribute('value', val.telNumber);
@@ -73,6 +103,7 @@ function ClickHandler(event, val) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
                 contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'm-' + divIndex);
                 contactsInputs.setAttribute('value', val.eMail);
@@ -82,13 +113,14 @@ function ClickHandler(event, val) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
+                contactsInputs.setAttribute('onclick', 'ClickButtonContacts(event)');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);
                 contactsInputs.setAttribute('style', 'display: block; clear: both; height: 20px;');
                 body.append(contactsInputs);
 
             }
 
-        })
+        });
 
     } // view contacts list
 
