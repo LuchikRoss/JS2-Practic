@@ -1,7 +1,7 @@
 # JS2-Practic
 = PhoneBook =
 
-минимальное количество кликов,
+минимизация кликов,
 поддержка изображений
 
 https://luchikross.github.io/JS2-Practic/
