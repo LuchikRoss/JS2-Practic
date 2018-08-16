@@ -39,13 +39,13 @@ img {
 .wrapper {
   max-width: 1366px;
   margin: 0 auto;
-  padding: 0 0px;
+  padding: 0;
   background: darkgray;
   width: 100%; }
 
 .contact {
   justify-content: center;
-  margin: 10px 0; }
+  margin: 15px auto; }
 
 .contacts {
   padding: 10px; }
@@ -61,7 +61,7 @@ img {
 .contactsForm {
   display: flex;
   flex-direction: column;
-  padding: 50px; }
+  padding: 20px; }
 
 input:-webkit-autofill,
 input:-webkit-autofill:active {
@@ -84,17 +84,14 @@ input:-webkit-autofill:active {
     .contactFormIn__firstName:hover {
       box-shadow: inset 2px 2px #151515; }
   .contactFormIn__lastName {
-    max-width: 201px;
     box-shadow: inset 1px 0px #151515; }
     .contactFormIn__lastName:hover {
       box-shadow: inset 2px 0px #151515; }
   .contactFormIn__phoneNumber {
-    max-width: 201px;
     box-shadow: inset 1px 0px #151515; }
     .contactFormIn__phoneNumber:hover {
       box-shadow: inset 2px 0px #151515; }
   .contactFormIn__contactEmail {
-    max-width: 201px;
     border-bottom-left-radius: 9px;
     border-bottom-right-radius: 9px;
     box-shadow: inset 1px -1px #151515; }
@@ -102,8 +99,9 @@ input:-webkit-autofill:active {
       box-shadow: inset 2px -2px #151515; }
 
 .contactFormBtn {
+  position: absolute;
   margin-top: 8px;
-  margin-left: 34px;
+  margin-left: 35px;
   font-weight: 800;
   width: 28px;
   height: 28px;
@@ -136,7 +134,8 @@ input:-webkit-autofill:active {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 5px; }
+  padding: 5px;
+  margin-right: 33px; }
 
 .faSearch {
   width: 26px;
@@ -144,7 +143,7 @@ input:-webkit-autofill:active {
   line-height: 26px;
   text-align: center;
   margin-right: -29px;
-  margin-top: 5px;
+  margin-top: 4px;
   position: relative;
   color: darkgray;
   z-index: 1;
@@ -157,6 +156,13 @@ input:-webkit-autofill:active {
   position: absolute;
   margin-top: 2px;
   margin-left: -36px; }
+
+footer {
+  padding-top: 40px;
+  margin: 0 auto;
+  text-align: center;
+  height: 60px;
+  background: darkgray; }
 
 @media only screen and (max-width: 485px) {
   .contacts {

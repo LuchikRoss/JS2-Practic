@@ -9,11 +9,6 @@ function ClickHandler(event, val) {
     ClickButtonContacts(event);
 }
 
-function ClickButtonContact(event){
-
-    ClickButtonContacts(event);
-}
-
 
 function ClickButtonContacts(event) {
 
@@ -30,35 +25,45 @@ function ClickButtonContacts(event) {
     window.contacts[idInpNew].telNumber = document.getElementById('p-' + idInp).value;
     window.contacts[idInpNew].eMail = document.getElementById('m-' + idInp).value;
     console.log(window.contacts);
-
-    console.log('Write Local Storage');
+    localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
+    console.log('Local Storage Save');
     document.getElementById('d-' + idInp).innerHTML = '';
-}
+} // Сохранение контакта после редактирования (поиск по ID)
 
 
 (function () {
 
-    /**
-     * Requests
-     */
+    if (window.localStorage) {
+        var response = JSON.parse(localStorage.getItem('myStorage'));
+        console.log('local storage present', response);
+        window.contacts = response;
+        viewContacts(window.contacts);
+    }
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'js/contacts.json', true);
+    else {
+        /**
+         * Requests
+         */
 
-    xhr.onload = function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'js/contacts.json', true);
 
-        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-            var response = JSON.parse(xhr.response);
-            localStorage.setItem('myStorage', JSON.stringify(response.contacts));
-            console.log(response.contacts);
-            viewContacts(response.contacts);
-            window.contacts = response.contacts;
-        }
+        xhr.onload = function () {
 
-    };
+            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 
-    xhr.send();
+                response = JSON.parse(xhr.response);
 
+                localStorage.setItem('myStorage', JSON.stringify(response.contacts)); // Save Array To Local Storage
+                console.log(response.contacts);
+                viewContacts(response.contacts);
+                window.contacts = response.contacts;
+            }
+
+        };
+
+        xhr.send();
+    }
 
     function viewContacts(contacts) {
 
@@ -73,15 +78,15 @@ function ClickButtonContacts(event) {
                 divIndex++;
 
                 var contactsInputs = document.createElement('img');
-                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
+                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
+                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
                 contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right;');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'f-' + divIndex);
                 contactsInputs.setAttribute('value', val.fName);
                 contactsInputs.setAttribute('placeholder', 'First Name');
@@ -89,24 +94,27 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
+                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'l-' + divIndex);
                 contactsInputs.setAttribute('value', val.lName);
                 contactsInputs.setAttribute('placeholder', 'Last Name');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
+                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'p-' + divIndex);
                 contactsInputs.setAttribute('value', val.telNumber);
                 contactsInputs.setAttribute('placeholder', 'Phone');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
+                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'm-' + divIndex);
                 contactsInputs.setAttribute('value', val.eMail);
                 contactsInputs.setAttribute('placeholder', 'E-mail');
@@ -115,7 +123,7 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
-                contactsInputs.setAttribute('onclick', 'ClickButtonContact(event)');
+                //contactsInputs.setAttribute('onclick', 'ClickButtonContact(event)');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);
                 contactsInputs.setAttribute('style', 'display: block; clear: both; height: 20px;');
                 body.append(contactsInputs);
@@ -127,49 +135,58 @@ function ClickButtonContacts(event) {
     } // view contacts list
 
 
-    document.addEventListener("DOMContentLoaded", function (event) {
+    document.addEventListener("DOMContentLoaded", function (event) { // инициализировать (подвесить) событие загрузки сайта
 
 
-        var signInFormByName = document.getElementsByName('signInForm')[0];
-        var inputLogin = signInFormByName.getElementsByTagName('input')[0];
-        var inputLoginLName = signInFormByName.getElementsByTagName('input')[1];
-        var signInBtn = signInFormByName.getElementsByTagName('button')[1];
+        var signInFormByName = document.getElementsByName('signInForm')[0]; // создать объект signInFormByName, состоящий из всех значений формы для поиска контактов в вёрстке с именем signInForm
+        var inputLogin = signInFormByName.getElementsByTagName('input')[0]; // создать объект inputLogin из первого input формы signInForm
+        var signInBtn = signInFormByName.getElementsByTagName('button')[1]; // создать объект signInBtn из формы signInForm [1 это индекс значения, означающий 2ю кнопку, потому что счёт идёт с 0]
 
 
-        signInBtn.addEventListener('click', function () {
+        signInBtn.addEventListener('click', function () { // инициализировать (подвесить) событие клика на кнопку добавления контакта
 
-            console.log('button (+) clicked');
-            showFormBtns();
-            let localResponse = readLocalStorage();
-            console.log(localResponse);
-            let addArr = {};
-            addArr.fName = signInFormByName.getElementsByTagName('input')[0].value;
-            addArr.lName = signInFormByName.getElementsByTagName('input')[1].value;
-            addArr.telNumber = signInFormByName.getElementsByTagName('input')[2].value;
-            addArr.eMail = signInFormByName.getElementsByTagName('input')[3].value;
+            console.log('button (+) clicked'); // вывести в консоль подтверждение отработки этого события
+            if (signInFormByName.getElementsByTagName('input')[0].value) {
+                if (signInFormByName.getElementsByTagName('input')[0].value.trim() != '') { // Строка содержит не пробелы
+                    showFormBtns(); // выполнить функцию (вывести дополнительную форму) для редактирования нового контакта
+                    let localResponse = window.contacts; // присвоить локальной переменной значение глобального массива (со всей телефонной книгой)
+                    console.log(localResponse); // вывести в консоль этот массив
+                    let addArr = {}; // создать (инициализировать) новый массив
+                    addArr.fName = signInFormByName.getElementsByTagName('input')[0].value; // присвоить ключу fName массива значение первого поля input в вёрстке
+                    addArr.lName = signInFormByName.getElementsByTagName('input')[1].value; // присвоить ключу lName массива значение второго поля input в вёрстке
+                    addArr.telNumber = signInFormByName.getElementsByTagName('input')[2].value; // присвоить ключу telNumber массива значение третьего поля input в вёрстке
+                    addArr.eMail = signInFormByName.getElementsByTagName('input')[3].value; // присвоить ключу eMail массива значение четвёртого поля input в вёрстке
 
-            if (document.getElementById("headImg").title === 'member picture present'){
-                addArr.image = document.getElementById("headImg").src;
-                console.log(document.getElementById("headImg").title);
-            }
-            else{
-                addArr.image = 'img/no-image.png';
-                console.log('member picture not present, set to default');
-            }
+                    if (document.getElementById("headImg").title === 'member picture present') { // если присутствует изображение контакта
+                        addArr.image = document.getElementById("headImg").src; // присвоить это изображение объекту
+                        console.log(document.getElementById("headImg").title); // вывести в консоль значение аттрибута title присвоенного изображения
+                    }
+                    else { // если отсутствует изображение контакта
+                        addArr.image = 'img/no-image.png'; // присвоить объекту дефолтное изображение (по умолчанию)
+                        console.log('member picture not present, set to default'); // вывести в консоль справку о том, что новому абоненту присваивается дефолтное изображение
+                    }
 
-            if (addArr.fName) {
-                let localResponseWrite = localResponse.concat(addArr);
-                console.log(localResponseWrite);
-                writeLocalStorage(localResponseWrite);
-                setTimeout(pauseMilliseconds, 1000);
-                viewContacts(localResponseWrite);
-                window.contacts = localResponseWrite;
-            }
-            else {
-                console.log('first name is not set');
-            }
+                    if (addArr.fName) { // проверка наличия имени абонента у объекта (валидация), если имя существует, тогда:
+                        let localResponseWrite = localResponse.concat(addArr); // добавление нового объекта в массив
+                        console.log(localResponseWrite); // вывести в консоль новый массив (с учётом нового абонента в нём)
 
-        }); // New Member Button Click
+                        viewContacts(localResponseWrite); // отображение контактов (отрисовка)
+                        window.contacts = localResponseWrite; // сохранение в глобальный массив
+                        localStorage.setItem('myStorage', JSON.stringify(localResponseWrite)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
+                        setTimeout(pauseMilliseconds, 1000); // пауза 1сек
+                    }
+                    else { // если имя абонента не было задано
+                        console.log('first name is not set'); // вывести информацию в консоль
+                    }
+
+                }
+                else { // строка состоит из одних пробелов
+                    console.log('строка состоит из одних пробелов');
+                    signInFormByName.getElementsByTagName('input')[0].value = '';
+                    viewContacts(window.contacts);
+                }
+            } // пустая строка
+        }); // Add New Abonent (+ Button Click)
 
 
         let photoBtnClick = signInFormByName.getElementsByTagName('button')[0];
@@ -244,6 +261,7 @@ function ClickButtonContacts(event) {
             clearInputs();
             signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
             signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
+            localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
 
         }); // Click Delete Button
 
@@ -259,86 +277,104 @@ function ClickButtonContacts(event) {
         inputLogin.addEventListener('input', function () {
 
             console.log('input is changed');
-            showFormBtns();
 
-            fNameValue = signInFormByName.getElementsByTagName('input')[0].value;
-            lengthSymbols = fNameValue.length; // количество символов в строке
+            if (signInFormByName.getElementsByTagName('input')[0].value.trim() != '') { // Строка содержит не пробелы
+                showFormBtns();
 
-            contacts = window.contacts;
-            var i = 0;
-            var vWCSPlus = [{}];
+                let fNameValue = signInFormByName.getElementsByTagName('input')[0].value;
+                let lengthSymbols = fNameValue.length; // количество символов в строке
 
-            var idAdress = -1;
-            var idAdressSmall = -1;
-            var idAdressContacts = [];
+                contacts = window.contacts;
+                var i = 0;
+                var vWCSPlus = [{}];
 
-            contacts.forEach(function (val, index) {
+                var idAdress = -1;
+                var idAdressSmall = -1;
+                var idAdressContacts = [];
 
-                idAdress++;
+                var abonentPresent;
 
-                var fNameUpper = val.fName.toUpperCase();
+                contacts.forEach(function (val, index) {
 
-                if (fNameValue.toUpperCase() === fNameUpper.substr(0, lengthSymbols)) {
+                    idAdress++;
 
-                    idAdressSmall++;
-                    idAdressContacts[idAdressSmall]=idAdress;
+                    var fNameUpper = val.fName.toUpperCase();
 
-                    console.log(fNameUpper);
-                    let addArr = {};
-                    addArr.fName = val.fName;
-                    addArr.lName = val.lName;
-                    addArr.telNumber = val.telNumber;
-                    addArr.eMail = val.eMail;
-                    addArr.image = val.image;
-                    let vWCSP = vWCSPlus.concat(addArr);
-                    viewContacts(vWCSP);
-                    console.log(vWCSP);
-                    vWCSPlus = vWCSP;
-                } // поиск по символам Имени
+                    if (fNameValue.toUpperCase() === fNameUpper.substr(0, lengthSymbols)) {
 
-                if (val.fName.toUpperCase() === fNameValue.toUpperCase()) {
+                        idAdressSmall++;
+                        idAdressContacts[idAdressSmall] = idAdress;
 
-                    let addArr = {};
-                    addArr.fName = val.fName;
-                    addArr.lName = val.lName;
-                    addArr.telNumber = val.telNumber;
-                    addArr.eMail = val.eMail;
-                    signInFormByName.getElementsByTagName('input')[0].value = val.fName;
-                    signInFormByName.getElementsByTagName('input')[1].value = val.lName;
-                    signInFormByName.getElementsByTagName('input')[2].value = val.telNumber;
-                    signInFormByName.getElementsByTagName('input')[3].value = val.eMail;
+                        console.log(fNameUpper);
+                        let addArr = {};
+                        addArr.fName = val.fName;
+                        addArr.lName = val.lName;
+                        addArr.telNumber = val.telNumber;
+                        addArr.eMail = val.eMail;
+                        addArr.image = val.image;
+                        let vWCSP = vWCSPlus.concat(addArr);
+                        viewContacts(vWCSP);
+                        console.log(vWCSP);
+                        vWCSPlus = vWCSP;
+                        abonentPresent = vWCSP;
+                    } // поиск по символам Имени
 
-                    document.getElementById('headImg').setAttribute('src', val.image);
-                    signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
-                    signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
+                    if (val.fName.toUpperCase() === fNameValue.toUpperCase()) {
 
-                    window.dellArr = index;
-                    console.log(addArr);
+                        let addArr = {};
+                        addArr.fName = val.fName;
+                        addArr.lName = val.lName;
+                        addArr.telNumber = val.telNumber;
+                        addArr.eMail = val.eMail;
+                        signInFormByName.getElementsByTagName('input')[0].value = val.fName;
+                        signInFormByName.getElementsByTagName('input')[1].value = val.lName;
+                        signInFormByName.getElementsByTagName('input')[2].value = val.telNumber;
+                        signInFormByName.getElementsByTagName('input')[3].value = val.eMail;
 
-                    var windowContactsSlice = window.contacts;
-                    var vWCS = windowContactsSlice.slice(index, index + 1);
-                    viewContacts(vWCS);
-                    console.log(vWCS);
-                }
-                else {
-                    window.dellArrFN = false;
-                    if (window.dellArrLN === false) {
+                        document.getElementById('headImg').setAttribute('src', val.image);
                         signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
                         signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
-                        document.getElementById('headImg').src = 'img/phone.png';
-                    }
-                }
-                if (!signInFormByName.getElementsByTagName('input')[0].value){
-                    clearInputs();
-                    viewContacts(contacts);
-                    signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
-                    signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
-                }
-                window.idAdressContacts = idAdressContacts;
-                console.log(idAdressContacts);
-            });
 
-            console.log('поиск по имени: ', i);
+                        window.dellArr = index;
+                        console.log(addArr);
+
+                        var windowContactsSlice = window.contacts;
+                        var vWCS = windowContactsSlice.slice(index, index + 1);
+                        viewContacts(vWCS);
+                        console.log(vWCS);
+                        abonentPresent = vWCSP;
+                    }
+                    else {
+                        window.dellArrFN = false;
+                        if (window.dellArrLN === false) {
+                            signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
+                            signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
+                            document.getElementById('headImg').src = 'img/phone.png';
+                        }
+                    }
+                    if (!signInFormByName.getElementsByTagName('input')[0].value) {
+                        clearInputs();
+                        viewContacts(contacts);
+                        signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
+                        signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
+                    }
+                    window.idAdressContacts = idAdressContacts;
+                    console.log(idAdressContacts);
+                });
+
+                if (!abonentPresent) {
+                    document.getElementsByClassName('contacts')[0].innerHTML = '';
+                }
+
+            } // Строка содержит не пробелы
+            else{
+
+                signInFormByName.getElementsByTagName('input')[0].value = ''; // валидация строки, состоящей из пробелов
+                window.idAdressContacts = null;
+                viewContacts(window.contacts);
+            }
+
+            console.log('поиск по первым символам: ', i);
 
         }); // First Name Input Change
 
@@ -348,7 +384,7 @@ function ClickButtonContacts(event) {
 
     window.onload = function () {
 
-        console.log('window is loaded');
+        console.log('window ready');
 
     } // DOM Loaded
 
