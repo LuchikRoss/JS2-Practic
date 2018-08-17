@@ -9,7 +9,6 @@ function ClickHandler(event, val) {
     ClickButtonContacts(event);
 }
 
-
 function ClickButtonContacts(event) {
 
     if (Array.isArray(window.idAdressContacts) === true) {
@@ -80,15 +79,16 @@ function ClickButtonContacts(event) {
                 divIndex++;
 
                 var contactsInputs = document.createElement('img');
-                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
+                //contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
+                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
                 contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right;');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'f-' + divIndex);
                 contactsInputs.setAttribute('value', val.fName);
                 contactsInputs.setAttribute('placeholder', 'First Name');
@@ -96,27 +96,24 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
-                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'l-' + divIndex);
                 contactsInputs.setAttribute('value', val.lName);
                 contactsInputs.setAttribute('placeholder', 'Last Name');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
-                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'p-' + divIndex);
                 contactsInputs.setAttribute('value', val.telNumber);
                 contactsInputs.setAttribute('placeholder', 'Phone');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                //contactsInputs.setAttribute('onclick', 'ClickHandler(event)');
-                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
-                contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'm-' + divIndex);
                 contactsInputs.setAttribute('value', val.eMail);
                 contactsInputs.setAttribute('placeholder', 'E-mail');
@@ -125,7 +122,6 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
-                //contactsInputs.setAttribute('onclick', 'ClickButtonContact(event)');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);
                 contactsInputs.setAttribute('style', 'display: block; clear: both; height: 20px;');
                 body.append(contactsInputs);
@@ -387,8 +383,8 @@ function ClickButtonContacts(event) {
 
     window.onload = function () {
 
-        window.idMouseLeave = [];
         console.log('document ready');
+
 
     } // DOM Loaded
 
