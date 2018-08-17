@@ -1,5 +1,29 @@
 
 
+function ClickHandlerContacts(event, val) {
+
+    if (window.divIndex) {
+
+        let forDivIindex = window.divIndex;
+
+        for (let i = 0; i < forDivIindex; i++) {
+
+            document.getElementById('i-' + i).style.display = 'none';
+            document.getElementById('l-' + i).style.display = 'none';
+            document.getElementById('p-' + i).style.display = 'none';
+            document.getElementById('m-' + i).style.display = 'none';
+
+        }
+
+        idFlight = event.target.id;
+        idInp = idFlight.substring(2);
+        document.getElementById('i-' + idInp).style.display = 'inline-block';
+        document.getElementById('l-' + idInp).style.display = 'inline-block';
+        document.getElementById('p-' + idInp).style.display = 'inline-block';
+        document.getElementById('m-' + idInp).style.display = 'inline-block';
+    }
+}
+
 function ClickHandler(event, val) {
     idFlight = event.target.id;
     console.log(idFlight, val);
@@ -81,18 +105,22 @@ function ClickButtonContacts(event) {
                 var contactsInputs = document.createElement('img');
                 //contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
+                contactsInputs.setAttribute('class', 'inputContacts');
                 contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
                 contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right;');
+                contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
+                contactsInputs.setAttribute('onclick', 'ClickHandlerContacts(event, this.value)');
                 contactsInputs.setAttribute('class', ' inputContacts');
-                contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'f-' + divIndex);
                 contactsInputs.setAttribute('value', val.fName);
                 contactsInputs.setAttribute('placeholder', 'First Name');
+                contactsInputs.setAttribute('maxlength', '22');
                 contactsInputs.setAttribute('style', 'border-top-left-radius: 9px; border-top-right-radius: 9px;');
+                contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
@@ -100,7 +128,9 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'l-' + divIndex);
                 contactsInputs.setAttribute('value', val.lName);
+                contactsInputs.setAttribute('maxlength', '22');
                 contactsInputs.setAttribute('placeholder', 'Last Name');
+                contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
@@ -108,7 +138,9 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'p-' + divIndex);
                 contactsInputs.setAttribute('value', val.telNumber);
+                contactsInputs.setAttribute('maxlength', '17');
                 contactsInputs.setAttribute('placeholder', 'Phone');
+                contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
@@ -118,7 +150,9 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('value', val.eMail);
                 contactsInputs.setAttribute('placeholder', 'E-mail');
                 contactsInputs.setAttribute('style', 'margin-bottom: 30px;');
+                contactsInputs.setAttribute('maxlength', '40');
                 contactsInputs.setAttribute('style', 'border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;');
+                contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
@@ -128,9 +162,13 @@ function ClickButtonContacts(event) {
 
             }
 
+            window.divIndex = divIndex;
+
         });
 
+
     } // view contacts list
+
 
 
     document.addEventListener("DOMContentLoaded", function (event) { // инициализировать (подвесить) событие загрузки сайта

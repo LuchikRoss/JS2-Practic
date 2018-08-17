@@ -22,13 +22,13 @@
             <div class="contactFormIn">
                 <button type="button" class="contactFormBtn fasCamera contactFormBtn__photo" title="Выбрать изображение для абонента"><i class="fas fa-camera"></i></button>
                 <i class="fas fa-search faSearch" aria-hidden="true"></i>
-                <input required type="text" title="" placeholder="Search" name="firstNameS" class="contactFormIn contactFormIn__firstName" autocomplete="off">
+                <input required type="text" title="" placeholder="Search" class="contactFormIn contactFormIn__firstName" autocomplete="off" maxlength="25">
                 <i class="fas fa-user-alt faSearch"></i>
-                <input type="text" placeholder="" name="lastNameS" class="contactFormIn contactFormIn__lastName contactFormIn__lastName-unactive" autocomplete="off">
+                <input type="text" placeholder="" class="contactFormIn contactFormIn__lastName contactFormIn__lastName-unactive" autocomplete="off" maxlength="25">
                 <i class="fas fa-phone faSearch"></i>
-                <input type="tel" placeholder="" name="phoneNumberS" class="contactFormIn contactFormIn__phoneNumber contactFormIn__phoneNumber-unactive" autocomplete="off">
+                <input required type="tel" class="contactFormIn contactFormIn__phoneNumber contactFormIn__phoneNumber-unactive" maxlength="17" autocomplete="off" maxlength="15">
                 <i class="fas fa-envelope faSearch"></i>
-                <input type="email" placeholder="" name="contactEmailS" class="contactFormIn contactFormIn__contactEmail contactFormIn__contactEmail-unactive" autocomplete="off">
+                <input type="email" placeholder="" class="contactFormIn contactFormIn__contactEmail contactFormIn__contactEmail-unactive" autocomplete="off" maxlength="40">
                 <input id="photoInputButton" type="file" style="display: none;">
             </div>
 
