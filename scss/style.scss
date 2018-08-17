@@ -238,6 +238,12 @@ input:-webkit-autofill:active{
   margin-left: -36px;
 }
 
+.inputContactsIcon{
+  &:hover{
+    color: darkred !important;
+  }
+}
+
 footer{
   padding-top: 40px;
   margin: 0 auto;

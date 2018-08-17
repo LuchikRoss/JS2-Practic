@@ -14,6 +14,7 @@ function ClickHandlerContacts(event, val) {
             document.getElementById('m-' + i).style.display = 'none';
             document.getElementById('u-' + i).style.display = 'none';
             document.getElementById('d-' + i).style.display = 'none';
+            document.getElementById('c-' + i).style.display = 'none';
             document.getElementById('f-' + i).style.borderTopLeftRadius = '0';
             document.getElementById('f-' + i).style.borderTopRightRadius = '0';
 
@@ -31,6 +32,7 @@ function ClickHandlerContacts(event, val) {
         document.getElementById('m-' + idInp).style.display = 'inline-block';
         document.getElementById('u-' + idInp).style.display = 'block';
         document.getElementById('d-' + idInp).style.display = 'block';
+        document.getElementById('c-' + idInp).style.display = 'inline-block';
 
     }
 }
@@ -119,6 +121,15 @@ function ClickButtonContacts(event) {
                 contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
+                var contactsInputs = document.createElement('i');
+                contactsInputs.setAttribute('class', 'fas fa-minus-circle inputContactsIcon');
+                contactsInputs.setAttribute('ID', 'c-' + divIndex);
+                //<i class="fas fa-minus-circle"></i>
+                contactsInputs.setAttribute('title', 'удалить контакт');
+                contactsInputs.setAttribute('style', 'font-size: 30px; width: 40px; height: 35px; color: gray; float: right; clear: both; padding-top: 56px; margin-left: -9px;');
+                contactsInputs.style.display = 'none';
+                body.append(contactsInputs);
+
                 var contactsInputs = document.createElement('img');
                 //contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
@@ -170,6 +181,7 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('style', 'border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;');
                 contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
+
 
                 var contactsInputs = document.createElement('div');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);

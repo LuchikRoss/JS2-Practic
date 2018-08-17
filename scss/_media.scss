@@ -37,6 +37,11 @@
     } // __btn
   } // contactsItem
 
+  .inputContactsIcon{
+    position: absolute;
+    margin-left: 175px !important;
+  }
+
 } // max485px
 
 @media only screen and ( min-width: 485px ) {
@@ -46,4 +51,5 @@
     margin-top: -55px;
     margin-left: 185px;
   } // contactFormBtn-save
+
 }
