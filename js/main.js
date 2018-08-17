@@ -6,21 +6,32 @@ function ClickHandlerContacts(event, val) {
 
         let forDivIindex = window.divIndex;
 
-        for (let i = 0; i < forDivIindex; i++) {
+        for (let i = 0; i <= forDivIindex; i++) {
 
             document.getElementById('i-' + i).style.display = 'none';
             document.getElementById('l-' + i).style.display = 'none';
             document.getElementById('p-' + i).style.display = 'none';
             document.getElementById('m-' + i).style.display = 'none';
+            document.getElementById('u-' + i).style.display = 'none';
+            document.getElementById('d-' + i).style.display = 'none';
+            document.getElementById('f-' + i).style.borderTopLeftRadius = '0';
+            document.getElementById('f-' + i).style.borderTopRightRadius = '0';
+
+            //document.getElementById('f-' + i).style.background = '#dad6d6';
 
         }
 
         idFlight = event.target.id;
         idInp = idFlight.substring(2);
+        document.getElementById('f-' + idInp).style.borderTopLeftRadius = '9px';
+        document.getElementById('f-' + idInp).style.borderTopRightRadius = '9px';
         document.getElementById('i-' + idInp).style.display = 'inline-block';
         document.getElementById('l-' + idInp).style.display = 'inline-block';
         document.getElementById('p-' + idInp).style.display = 'inline-block';
         document.getElementById('m-' + idInp).style.display = 'inline-block';
+        document.getElementById('u-' + idInp).style.display = 'block';
+        document.getElementById('d-' + idInp).style.display = 'block';
+
     }
 }
 
@@ -102,13 +113,19 @@ function ClickButtonContacts(event) {
 
                 divIndex++;
 
+                var contactsInputs = document.createElement('div');
+                contactsInputs.setAttribute('ID', 'u-' + divIndex);
+                contactsInputs.setAttribute('style', 'padding-bottom: 25px; clear: both;');
+                contactsInputs.style.display = 'none';
+                body.append(contactsInputs);
+
                 var contactsInputs = document.createElement('img');
                 //contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
                 //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('class', 'inputContacts');
                 contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
-                contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right;');
+                contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right; margin-top: 20px;');
                 contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
@@ -119,7 +136,7 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('value', val.fName);
                 contactsInputs.setAttribute('placeholder', 'First Name');
                 contactsInputs.setAttribute('maxlength', '22');
-                contactsInputs.setAttribute('style', 'border-top-left-radius: 9px; border-top-right-radius: 9px;');
+                contactsInputs.setAttribute('style', '');
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 body.append(contactsInputs);
 
@@ -149,7 +166,6 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('ID', 'm-' + divIndex);
                 contactsInputs.setAttribute('value', val.eMail);
                 contactsInputs.setAttribute('placeholder', 'E-mail');
-                contactsInputs.setAttribute('style', 'margin-bottom: 30px;');
                 contactsInputs.setAttribute('maxlength', '40');
                 contactsInputs.setAttribute('style', 'border-bottom-left-radius: 9px; border-bottom-right-radius: 9px;');
                 contactsInputs.style.display = 'none';
@@ -157,7 +173,9 @@ function ClickButtonContacts(event) {
 
                 var contactsInputs = document.createElement('div');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);
-                contactsInputs.setAttribute('style', 'display: block; clear: both; height: 20px;');
+                contactsInputs.setAttribute('value', val.eMail);
+                contactsInputs.setAttribute('style', 'padding-top: 48px; clear: both;');
+                contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
             }
