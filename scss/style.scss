@@ -62,8 +62,10 @@ input{
 
 img {
   margin-top: -10px;
-  width: 100%;
-  height: auto;
+  max-height: 106px;
+  width: auto;
+  background-size: cover;
+
 } // img
 
 .wrapper {

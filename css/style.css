@@ -33,8 +33,9 @@ input {
 
 img {
   margin-top: -10px;
-  width: 100%;
-  height: auto; }
+  max-height: 106px;
+  width: auto;
+  background-size: cover; }
 
 .wrapper {
   max-width: 1366px;
@@ -165,12 +166,10 @@ footer {
   background: darkgray; }
 
 @media only screen and (max-width: 485px) {
-  .contacts {
-    background: #151515; }
-    .contacts img {
-      float: none !important;
-      margin: 0 auto;
-      text-align: center; }
+  .contacts img {
+    float: none !important;
+    margin: 0 auto;
+    text-align: center; }
   .contactsItem {
     margin: 10px 10px 0 10px; } }
 

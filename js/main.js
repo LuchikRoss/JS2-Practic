@@ -12,14 +12,15 @@ function ClickHandler(event, val) {
 
 function ClickButtonContacts(event) {
 
-    if (Array.isArray(window.idAdressContacts) == true) {
+    if (Array.isArray(window.idAdressContacts) === true) {
         idInpNew = window.idAdressContacts[idInp];
         console.log(window.idAdressContacts[idInp]);
     }
     else {
         idInpNew = idInp;
     }
-    window.contacts[idInpNew].eMail = document.getElementById('i-' + idInp).value;
+
+    //window.contacts[idInpNew].image = document.getElementById('i-' + idInp).value;
     window.contacts[idInpNew].fName = document.getElementById('f-' + idInp).value;
     window.contacts[idInpNew].lName = document.getElementById('l-' + idInp).value;
     window.contacts[idInpNew].telNumber = document.getElementById('p-' + idInp).value;
@@ -28,6 +29,7 @@ function ClickButtonContacts(event) {
     localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
     console.log('Local Storage Save');
     document.getElementById('d-' + idInp).innerHTML = '';
+
 } // Сохранение контакта после редактирования (поиск по ID)
 
 
@@ -147,7 +149,8 @@ function ClickButtonContacts(event) {
 
             console.log('button (+) clicked'); // вывести в консоль подтверждение отработки этого события
             if (signInFormByName.getElementsByTagName('input')[0].value) {
-                if (signInFormByName.getElementsByTagName('input')[0].value.trim() != '') { // Строка содержит не пробелы
+                if (signInFormByName.getElementsByTagName('input')[0].value.trim() != '') { // Строка содержит не только пробелы
+                    window.idAdressContacts = null;
                     showFormBtns(); // выполнить функцию (вывести дополнительную форму) для редактирования нового контакта
                     let localResponse = window.contacts; // присвоить локальной переменной значение глобального массива (со всей телефонной книгой)
                     console.log(localResponse); // вывести в консоль этот массив
@@ -182,10 +185,10 @@ function ClickButtonContacts(event) {
                 }
                 else { // строка состоит из одних пробелов
                     console.log('строка состоит из одних пробелов');
-                    signInFormByName.getElementsByTagName('input')[0].value = '';
-                    viewContacts(window.contacts);
+                    clearInputs();
                 }
             } // пустая строка
+            clearInputs();
         }); // Add New Abonent (+ Button Click)
 
 
@@ -257,7 +260,6 @@ function ClickButtonContacts(event) {
             console.log('delete button click');
             console.log(window.dellArr);
             window.contacts.splice(window.dellArr, 1);
-            viewContacts(window.contacts);
             clearInputs();
             signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
             signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
@@ -266,11 +268,13 @@ function ClickButtonContacts(event) {
         }); // Click Delete Button
 
         function clearInputs(){
+            window.idAdressContacts = null;
             signInFormByName.getElementsByTagName('input')[0].value = '';
             signInFormByName.getElementsByTagName('input')[1].value = '';
             signInFormByName.getElementsByTagName('input')[2].value = '';
             signInFormByName.getElementsByTagName('input')[3].value = '';
             document.getElementById('headImg').src = 'img/phone.png';
+            viewContacts(window.contacts);
         }; // Clear Inputs
 
 
@@ -368,9 +372,8 @@ function ClickButtonContacts(event) {
 
             } // Строка содержит не пробелы
             else{
-
-                signInFormByName.getElementsByTagName('input')[0].value = ''; // валидация строки, состоящей из пробелов
                 window.idAdressContacts = null;
+                signInFormByName.getElementsByTagName('input')[0].value = ''; // валидация строки, состоящей из пробелов
                 viewContacts(window.contacts);
             }
 
@@ -384,7 +387,8 @@ function ClickButtonContacts(event) {
 
     window.onload = function () {
 
-        console.log('window ready');
+        window.idMouseLeave = [];
+        console.log('document ready');
 
     } // DOM Loaded
 
