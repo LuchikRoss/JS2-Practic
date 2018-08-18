@@ -102,6 +102,8 @@ input:-webkit-autofill:active {
       box-shadow: inset 2px -2px #151515; }
 
 .contactFormBtn {
+  display: flex;
+  justify-content: center;
   position: absolute;
   margin-top: 8px;
   margin-left: 34px;
@@ -109,7 +111,7 @@ input:-webkit-autofill:active {
   font-size: 18px;
   width: 28px;
   height: 28px;
-  line-height: 24px;
+  line-height: 25px;
   background: #642EFE;
   color: white;
   border-radius: 5px;
