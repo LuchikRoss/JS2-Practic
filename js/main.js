@@ -131,9 +131,8 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('img');
-                //contactsInputs.setAttribute('onmouseleave', 'ClickHandler(event, this.value)');
-                //contactsInputs.setAttribute('onchange', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('class', 'inputContacts');
+                contactsInputs.setAttribute('title', 'change image');
                 contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
                 contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right; margin-top: 20px;');
@@ -319,17 +318,17 @@ function ClickButtonContacts(event) {
         }
 
 
-        signInFormByName.getElementsByTagName('button')[2].addEventListener('click', function () {
-
-            console.log('delete button click');
-            console.log(window.dellArr);
-            window.contacts.splice(window.dellArr, 1);
-            clearInputs();
-            signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
-            signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
-            localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
-
-        }); // Click Delete Button
+        // signInFormByName.getElementsByTagName('button')[2].addEventListener('click', function () {
+        //
+        //     console.log('delete button click');
+        //     console.log(window.dellArr);
+        //     window.contacts.splice(window.dellArr, 1);
+        //     clearInputs();
+        //     signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
+        //     signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
+        //     localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
+        //
+        // }); // Click Delete Button
 
         function clearInputs(){
             window.idAdressContacts = null;
@@ -387,39 +386,39 @@ function ClickButtonContacts(event) {
                         abonentPresent = vWCSP;
                     } // поиск по символам Имени
 
-                    if (val.fName.toUpperCase() === fNameValue.toUpperCase()) {
-
-                        let addArr = {};
-                        addArr.fName = val.fName;
-                        addArr.lName = val.lName;
-                        addArr.telNumber = val.telNumber;
-                        addArr.eMail = val.eMail;
-                        signInFormByName.getElementsByTagName('input')[0].value = val.fName;
-                        signInFormByName.getElementsByTagName('input')[1].value = val.lName;
-                        signInFormByName.getElementsByTagName('input')[2].value = val.telNumber;
-                        signInFormByName.getElementsByTagName('input')[3].value = val.eMail;
-
-                        document.getElementById('headImg').setAttribute('src', val.image);
-                        signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
-                        signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
-
-                        window.dellArr = index;
-                        console.log(addArr);
-
-                        var windowContactsSlice = window.contacts;
-                        var vWCS = windowContactsSlice.slice(index, index + 1);
-                        viewContacts(vWCS);
-                        console.log(vWCS);
-                        abonentPresent = vWCSP;
-                    }
-                    else {
-                        window.dellArrFN = false;
-                        if (window.dellArrLN === false) {
-                            signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
-                            signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
-                            document.getElementById('headImg').src = 'img/phone.png';
-                        }
-                    }
+                    // if (val.fName.toUpperCase() === fNameValue.toUpperCase()) {
+                    //
+                    //     let addArr = {};
+                    //     addArr.fName = val.fName;
+                    //     addArr.lName = val.lName;
+                    //     addArr.telNumber = val.telNumber;
+                    //     addArr.eMail = val.eMail;
+                    //     signInFormByName.getElementsByTagName('input')[0].value = val.fName;
+                    //     signInFormByName.getElementsByTagName('input')[1].value = val.lName;
+                    //     signInFormByName.getElementsByTagName('input')[2].value = val.telNumber;
+                    //     signInFormByName.getElementsByTagName('input')[3].value = val.eMail;
+                    //
+                    //     document.getElementById('headImg').setAttribute('src', val.image);
+                    //     signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
+                    //     signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
+                    //
+                    //     window.dellArr = index;
+                    //     console.log(addArr);
+                    //
+                    //     var windowContactsSlice = window.contacts;
+                    //     var vWCS = windowContactsSlice.slice(index, index + 1);
+                    //     viewContacts(vWCS);
+                    //     console.log(vWCS);
+                    //     abonentPresent = vWCSP;
+                    // }
+                    // else {
+                    //     window.dellArrFN = false;
+                    //     if (window.dellArrLN === false) {
+                    //         signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
+                    //         signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
+                    //         document.getElementById('headImg').src = 'img/phone.png';
+                    //     }
+                    // }
                     if (!signInFormByName.getElementsByTagName('input')[0].value) {
                         clearInputs();
                         viewContacts(contacts);

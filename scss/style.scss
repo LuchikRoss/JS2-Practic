@@ -64,7 +64,10 @@ img {
   margin-top: -10px;
   height: 100%;
   width: auto;
-
+  border-radius: 5px;
+  &:hover{
+    cursor: pointer;
+  }
 } // img
 
 .wrapper {
@@ -167,8 +170,9 @@ input:-webkit-autofill:active{
 .contactFormBtn{
   position: absolute;
   margin-top: 8px;
-  margin-left: 35px;
+  margin-left: 34px;
   font-weight: 800;
+  font-size: 18px;
   width: 28px;
   height: 28px;
   line-height: 24px;
@@ -241,6 +245,7 @@ input:-webkit-autofill:active{
 .inputContactsIcon{
   &:hover{
     color: darkred !important;
+    cursor: pointer;
   }
 }
 
