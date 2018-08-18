@@ -1,4 +1,15 @@
 
+function ClickDeleteContacts(event, val) {
+
+    idFlight = event.target.id;
+    console.log(idFlight, val);
+    idInp = idFlight.substring(2);
+    window.idInp = idInp;
+    console.log('delete button click');
+    window.contacts.splice(window.idInp, 1);
+    localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
+    window.location.reload();
+} // Click Delete Button
 
 function ClickHandlerContacts(event, val) {
 
@@ -17,12 +28,10 @@ function ClickHandlerContacts(event, val) {
             document.getElementById('c-' + i).style.display = 'none';
             document.getElementById('f-' + i).style.borderTopLeftRadius = '0';
             document.getElementById('f-' + i).style.borderTopRightRadius = '0';
-
-            //document.getElementById('f-' + i).style.background = '#dad6d6';
-
         }
 
         idFlight = event.target.id;
+        console.log(idFlight, val);
         idInp = idFlight.substring(2);
         document.getElementById('f-' + idInp).style.borderTopLeftRadius = '9px';
         document.getElementById('f-' + idInp).style.borderTopRightRadius = '9px';
@@ -33,18 +42,21 @@ function ClickHandlerContacts(event, val) {
         document.getElementById('u-' + idInp).style.display = 'block';
         document.getElementById('d-' + idInp).style.display = 'block';
         document.getElementById('c-' + idInp).style.display = 'inline-block';
-
     }
-}
+} // Click Head Of Contact
+
 
 function ClickHandler(event, val) {
+
     idFlight = event.target.id;
     console.log(idFlight, val);
     idInp = idFlight.substring(2);
     document.getElementById('d-' + idInp).innerHTML = '<button class="contactFormBtn contactFormBtn-save"><i class="far fa-save"></i></button>';
     window.idInp = idInp;
     ClickButtonContacts(event);
-}
+
+} // Сохранение контакта после редактирования (поиск по ID)
+
 
 function ClickButtonContacts(event) {
 
@@ -56,7 +68,7 @@ function ClickButtonContacts(event) {
         idInpNew = idInp;
     }
 
-    //window.contacts[idInpNew].image = document.getElementById('i-' + idInp).value;
+    window.contacts[idInpNew].image = document.getElementById('i-' + idInp).value;
     window.contacts[idInpNew].fName = document.getElementById('f-' + idInp).value;
     window.contacts[idInpNew].lName = document.getElementById('l-' + idInp).value;
     window.contacts[idInpNew].telNumber = document.getElementById('p-' + idInp).value;
@@ -66,7 +78,7 @@ function ClickButtonContacts(event) {
     console.log('Local Storage Save');
     document.getElementById('d-' + idInp).innerHTML = '';
 
-} // Сохранение контакта после редактирования (поиск по ID)
+} // Сохранение контакта после редактирования
 
 
 (function () {
@@ -122,17 +134,17 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('i');
+                contactsInputs.setAttribute('onclick', 'ClickDeleteContacts(event, this.value)');
                 contactsInputs.setAttribute('class', 'fas fa-minus-circle inputContactsIcon');
                 contactsInputs.setAttribute('ID', 'c-' + divIndex);
-                //<i class="fas fa-minus-circle"></i>
-                contactsInputs.setAttribute('title', 'удалить контакт');
+                contactsInputs.setAttribute('title', 'Delete contact');
                 contactsInputs.setAttribute('style', 'font-size: 30px; width: 40px; height: 35px; color: gray; float: right; clear: both; padding-top: 56px; margin-left: -9px;');
                 contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('img');
                 contactsInputs.setAttribute('class', 'inputContacts');
-                contactsInputs.setAttribute('title', 'change image');
+                contactsInputs.setAttribute('title', 'Change image');
                 contactsInputs.setAttribute('ID', 'i-' + divIndex);
                 contactsInputs.setAttribute('src', val.image);
                 contactsInputs.setAttribute('style', 'width: 140px; margin: 20px; position: relative; float: right; margin-top: 20px;');
