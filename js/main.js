@@ -26,7 +26,7 @@ function ClickHandlerContacts(event, val) {
 
         console.log('window.divIndex: ', window.divIndex);
 
-        for (let i = 0; i < forDivIindex; i++) {
+        for (let i = 0; i <= forDivIindex; i++) {
 
             document.getElementById('i-' + i).style.display = 'none';
             document.getElementById('l-' + i).style.display = 'none';

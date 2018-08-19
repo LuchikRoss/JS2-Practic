@@ -3,28 +3,28 @@
     {
       "fName": "Vitaliy",
       "lName": "Shevchuk",
-      "telNumber": "+38073568920",
+      "telNumber": "+38(073)568-92-19",
       "eMail": "loremIpsum1@mail.ru",
       "image": "img/photolion.jpg"
     },
     {
       "fName": "Sveta",
       "lName": "Romanova",
-      "telNumber": "0669317769",
+      "telNumber": "066-93-17-769",
       "eMail": "loremIpsum2@mail.ru",
       "image": "img/d3300.jpg"
     },
     {
       "fName": "Kostya",
       "lName": "Demin",
-      "telNumber": "38050380464",
+      "telNumber": "(050)380-44-46",
       "eMail": "loremIpsum3@mail.ru",
       "image": "img/no-image.png"
     },
     {
       "fName": "Roma i Lera",
       "lName": "Onishenko",
-      "telNumber": "+380632951705",
+      "telNumber": "+38(063)29-51-705",
       "eMail": "loremIpsum4@mail.ru",
       "image": "img/8b4e975_b.jpg"
     }
