@@ -2,22 +2,31 @@
 function ClickDeleteContacts(event, val) {
 
     idFlight = event.target.id;
-    console.log(idFlight, val);
-    idInp = idFlight.substring(2);
+    idInpSS = idFlight.substring(2);
+
+    if (Array.isArray(window.idAdressContacts) === true) {
+        idInp = window.idAdressContacts[idInpSS];
+    }
+    else{
+        idInp = idInpSS;
+    }
+
     window.idInp = idInp;
-    console.log('delete button click');
     window.contacts.splice(window.idInp, 1);
     localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
     window.location.reload();
+
 } // Click Delete Button
+
 
 function ClickHandlerContacts(event, val) {
 
-    if (window.divIndex) {
 
-        let forDivIindex = window.divIndex;
+        var forDivIindex = window.divIndex;
 
-        for (let i = 0; i <= forDivIindex; i++) {
+        console.log('window.divIndex: ', window.divIndex);
+
+        for (let i = 0; i < forDivIindex; i++) {
 
             document.getElementById('i-' + i).style.display = 'none';
             document.getElementById('l-' + i).style.display = 'none';
@@ -31,7 +40,6 @@ function ClickHandlerContacts(event, val) {
         }
 
         idFlight = event.target.id;
-        console.log(idFlight, val);
         idInp = idFlight.substring(2);
         document.getElementById('f-' + idInp).style.borderTopLeftRadius = '9px';
         document.getElementById('f-' + idInp).style.borderTopRightRadius = '9px';
@@ -42,7 +50,7 @@ function ClickHandlerContacts(event, val) {
         document.getElementById('u-' + idInp).style.display = 'block';
         document.getElementById('d-' + idInp).style.display = 'block';
         document.getElementById('c-' + idInp).style.display = 'inline-block';
-    }
+
 } // Click Head Of Contact
 
 
@@ -68,7 +76,7 @@ function ClickButtonContacts(event) {
         idInpNew = idInp;
     }
 
-    window.contacts[idInpNew].image = document.getElementById('i-' + idInp).value;
+    //window.contacts[idInpNew].image = document.getElementById('i-' + idInp).value;
     window.contacts[idInpNew].fName = document.getElementById('f-' + idInp).value;
     window.contacts[idInpNew].lName = document.getElementById('l-' + idInp).value;
     window.contacts[idInpNew].telNumber = document.getElementById('p-' + idInp).value;
@@ -138,7 +146,7 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('class', 'fas fa-minus-circle inputContactsIcon');
                 contactsInputs.setAttribute('ID', 'c-' + divIndex);
                 contactsInputs.setAttribute('title', 'Delete contact');
-                contactsInputs.setAttribute('style', 'font-size: 30px; width: 40px; height: 35px; color: gray; float: right; clear: both; padding-top: 56px; margin-left: -9px;');
+                contactsInputs.setAttribute('style', 'font-size: 30px; width: 40px; height: 35px; color: gray; float: right; clear: both; margin-top: 56px; margin-left: -9px;');
                 contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
@@ -161,6 +169,7 @@ function ClickButtonContacts(event) {
                 contactsInputs.setAttribute('style', '');
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 body.append(contactsInputs);
+                console.log('ID VALUE : ', divIndex, 'f-' + divIndex);
 
                 var contactsInputs = document.createElement('input');
                 contactsInputs.setAttribute('class', ' inputContacts');
@@ -329,19 +338,6 @@ function ClickButtonContacts(event) {
 
         }
 
-
-        // signInFormByName.getElementsByTagName('button')[2].addEventListener('click', function () {
-        //
-        //     console.log('delete button click');
-        //     console.log(window.dellArr);
-        //     window.contacts.splice(window.dellArr, 1);
-        //     clearInputs();
-        //     signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
-        //     signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
-        //     localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
-        //
-        // }); // Click Delete Button
-
         function clearInputs(){
             window.idAdressContacts = null;
             signInFormByName.getElementsByTagName('input')[0].value = '';
@@ -369,20 +365,17 @@ function ClickButtonContacts(event) {
 
                 var idAdress = -1;
                 var idAdressSmall = -1;
-                var idAdressContacts = [];
+                var idAdressContacts = [0,0];
 
                 var abonentPresent;
 
-                contacts.forEach(function (val, index) {
+                contacts.forEach(function (val) {
 
                     idAdress++;
 
                     var fNameUpper = val.fName.toUpperCase();
 
                     if (fNameValue.toUpperCase() === fNameUpper.substr(0, lengthSymbols)) {
-
-                        idAdressSmall++;
-                        idAdressContacts[idAdressSmall] = idAdress;
 
                         console.log(fNameUpper);
                         let addArr = {};
@@ -391,56 +384,25 @@ function ClickButtonContacts(event) {
                         addArr.telNumber = val.telNumber;
                         addArr.eMail = val.eMail;
                         addArr.image = val.image;
-                        let vWCSP = vWCSPlus.concat(addArr);
-                        viewContacts(vWCSP);
-                        console.log(vWCSP);
-                        vWCSPlus = vWCSP;
-                        abonentPresent = vWCSP;
+                        if (val.fName) {
+
+                            idAdressSmall++;
+                            idAdressContacts[idAdressSmall] = idAdress;
+
+                            let vWCSP = vWCSPlus.concat(addArr);
+                            viewContacts(vWCSP);
+                            console.log(val.fName);
+                            vWCSPlus = vWCSP;
+                            abonentPresent = vWCSP;
+                            window.idAdressContacts = idAdressContacts;
+                        }
+
                     } // поиск по символам Имени
 
-                    // if (val.fName.toUpperCase() === fNameValue.toUpperCase()) {
-                    //
-                    //     let addArr = {};
-                    //     addArr.fName = val.fName;
-                    //     addArr.lName = val.lName;
-                    //     addArr.telNumber = val.telNumber;
-                    //     addArr.eMail = val.eMail;
-                    //     signInFormByName.getElementsByTagName('input')[0].value = val.fName;
-                    //     signInFormByName.getElementsByTagName('input')[1].value = val.lName;
-                    //     signInFormByName.getElementsByTagName('input')[2].value = val.telNumber;
-                    //     signInFormByName.getElementsByTagName('input')[3].value = val.eMail;
-                    //
-                    //     document.getElementById('headImg').setAttribute('src', val.image);
-                    //     signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
-                    //     signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
-                    //
-                    //     window.dellArr = index;
-                    //     console.log(addArr);
-                    //
-                    //     var windowContactsSlice = window.contacts;
-                    //     var vWCS = windowContactsSlice.slice(index, index + 1);
-                    //     viewContacts(vWCS);
-                    //     console.log(vWCS);
-                    //     abonentPresent = vWCSP;
-                    // }
-                    // else {
-                    //     window.dellArrFN = false;
-                    //     if (window.dellArrLN === false) {
-                    //         signInFormByName.getElementsByTagName('button')[1].classList.add('contactFormBtn__photo-unactive');
-                    //         signInFormByName.getElementsByTagName('button')[2].classList.remove('contactFormBtn__photo-unactive');
-                    //         document.getElementById('headImg').src = 'img/phone.png';
-                    //     }
-                    // }
-                    if (!signInFormByName.getElementsByTagName('input')[0].value) {
-                        clearInputs();
-                        viewContacts(contacts);
-                        signInFormByName.getElementsByTagName('button')[1].classList.remove('contactFormBtn__photo-unactive');
-                        signInFormByName.getElementsByTagName('button')[2].classList.add('contactFormBtn__photo-unactive');
-                    }
-                    window.idAdressContacts = idAdressContacts;
-                    console.log(idAdressContacts);
-                });
 
+
+                });
+                console.log(window.idAdressContacts);
                 if (!abonentPresent) {
                     document.getElementsByClassName('contacts')[0].innerHTML = '';
                 }
@@ -451,6 +413,11 @@ function ClickButtonContacts(event) {
                 signInFormByName.getElementsByTagName('input')[0].value = ''; // валидация строки, состоящей из пробелов
                 viewContacts(window.contacts);
             }
+
+            // if (idAdressSmall=0) {
+            //     idAdressContacts.splice(1, 1);
+            //     window.idAdressContacts = idAdressContacts;
+            // }
 
             console.log('поиск по первым символам: ', i);
 
@@ -473,84 +440,3 @@ function ClickButtonContacts(event) {
 
 })();
 
-
-//var vWCS = windowContactsSlice.slice(index, index + 1); //возвращает новый массив, содержащий копию части исходного массива
-//symbols = fNameValue.split(""); разбить строку на массив
-//symbols = fNameValue.substr(0,2); // разбить строку на символы
-
-//let myArr = {fName: '1', lName: '2', telNumber: '3', eMail: '4', image: '5'};
-// var showPwdBtn = document.getElementById('showPwd');
-// showPwdBtn.addEventListener('click', function () {
-//     var attributeValue = inputPassword.attributes['type'].value;
-//     if (attributeValue === 'text') {
-//         inputPassword.attributes['type'].value = 'password';
-//     } else {
-//         inputPassword.attributes['type'].value = 'text';
-//     }
-//
-//     // switch (attributeValue) {
-//     //     case 'text':
-//     //         inputPassword.attributes['type'].value = 'password';
-//     //         break;
-//     //     case 'password':
-//     //         inputPassword.attributes['type'].value = 'text';
-//     //         break;
-//     //     default :
-//     //         console.log('Undefined error');
-//     // }
-//
-//
-// })
-
-
-// var myArr = [1, 2, 3, 4, 10];
-// //
-// for (let i = 0; i < 1000000; i++) {
-//     myArr[i] = Math.random();
-// }
-//
-// let startFor = new Date();
-// for(var i in myArr){
-//     let obj = myArr[i];
-// }
-//
-// let endFor = new Date();
-// console.log(endFor - startFor);
-//
-// let startForEach = new Date();
-// myArr.forEach(function (val, index, arr) {
-// });
-// let endForEach = new Date();
-// console.log(endForEach - startForEach);
-//
-// let startMap = new Date();
-// myArr.map(function (val, index, arr) {
-// });
-// let endMap = new Date();
-// console.log(endMap - startMap);
-
-
-//  let moreThanFive = myArr.every(function (val) {
-//      return val < 11;
-//  });
-//
-//  let someVar = myArr.some(function (val) {
-//      return val > 5;
-//  });
-//
-// var sum= myArr.reduce(function(prev, current,index,arr){
-//      return prev+current;
-//  });
-//  console.log(sum);
-//
-//  var sum=0;
-//  myArr.forEach(function(val){
-//      sum+=val;
-//  });
-
-
-// console.log(sum);
-
-// console.log(someVar);
-
-//<button type="button" class="contactFormBtn contactFormBtn__photo contactFormBtn__photo-unactive"><i class="fas fa-camera"></i></button>
