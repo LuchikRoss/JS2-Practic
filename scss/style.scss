@@ -251,6 +251,31 @@ input:-webkit-autofill:active{
   }
 }
 
+.deleteContacts{
+  position: absolute;
+  display: inline-block;
+  margin: 0 auto;
+  margin-top: -255px;
+  margin-left: -280px;
+  width: 300px;
+  height: 315px;
+  z-index: 5;
+  background-color: black;
+  border-radius: 10px;
+  transition-duration: 1s;
+  text-align: center;
+  &__deleteContactsButton{
+    display: block;
+    position: absolute;
+    top: -50px;
+    left: 30px;
+    width: 250px;
+    height: 30px;
+    background-color: $bgColorLite;
+    color: black;
+  }
+}
+
 footer{
   padding-top: 40px;
   margin: 0 auto;

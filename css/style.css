@@ -167,6 +167,29 @@ input:-webkit-autofill:active {
   color: darkred !important;
   cursor: pointer; }
 
+.deleteContacts {
+  position: absolute;
+  display: inline-block;
+  margin: 0 auto;
+  margin-top: -255px;
+  margin-left: -280px;
+  width: 300px;
+  height: 315px;
+  z-index: 5;
+  background-color: black;
+  border-radius: 10px;
+  transition-duration: 1s;
+  text-align: center; }
+  .deleteContacts__deleteContactsButton {
+    display: block;
+    position: absolute;
+    top: -50px;
+    left: 30px;
+    width: 250px;
+    height: 30px;
+    background-color: #E6E6E6;
+    color: black; }
+
 footer {
   padding-top: 40px;
   margin: 0 auto;
@@ -177,8 +200,7 @@ footer {
 @media only screen and (max-width: 485px) {
   .contacts img {
     float: none !important;
-    margin: 0 auto;
-    text-align: center; }
+    margin: 0 auto; }
   .contactsItem {
     margin: 10px 10px 0 10px; }
   .inputContactsIcon {

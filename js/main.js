@@ -11,10 +11,22 @@ function ClickDeleteContacts(event, val) {
         idInp = idInpSS;
     }
 
+
+    // document.getElementById('z-' + window.idInp).style.visibility = 'visible';
+    // document.getElementById('z-' + window.idInp).style.opacity = '0.85';
+
+    // document.getElementById('h-' + window.idInp).style.visibility = 'visible';
+    // document.getElementById('h-' + window.idInp).style.opacity = '1';
+    // document.getElementById('h-' + window.idInp).style.title = 'Удалить';
+    result = confirm('Really delete this contact?'); // выводит окно с вопросом question с двумя кнопками OK и CANCEL
+
+    if (result === true) {
     window.idInp = idInp;
     window.contacts.splice(window.idInp, 1);
     localStorage.setItem('myStorage', JSON.stringify(window.contacts)); // Save Array To Local Storage сохраненить в браузере пользователя локальный массив с абонентами
     window.location.reload();
+    }
+
 
 } // Click Delete Button
 
@@ -161,7 +173,7 @@ function ClickButtonContacts(event) {
 
                 var contactsInputs = document.createElement('input');
                 contactsInputs.setAttribute('onclick', 'ClickHandlerContacts(event, this.value)');
-                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('class', 'inputContacts');
                 contactsInputs.setAttribute('ID', 'f-' + divIndex);
                 contactsInputs.setAttribute('value', val.fName);
                 contactsInputs.setAttribute('placeholder', 'First Name');
@@ -172,7 +184,7 @@ function ClickButtonContacts(event) {
                 console.log('ID VALUE : ', divIndex, 'f-' + divIndex);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('class', 'inputContacts');
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'l-' + divIndex);
                 contactsInputs.setAttribute('value', val.lName);
@@ -182,7 +194,7 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('class', 'inputContacts');
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'p-' + divIndex);
                 contactsInputs.setAttribute('value', val.telNumber);
@@ -192,7 +204,7 @@ function ClickButtonContacts(event) {
                 body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('input');
-                contactsInputs.setAttribute('class', ' inputContacts');
+                contactsInputs.setAttribute('class', 'inputContacts');
                 contactsInputs.setAttribute('onkeyup', 'ClickHandler(event, this.value)');
                 contactsInputs.setAttribute('ID', 'm-' + divIndex);
                 contactsInputs.setAttribute('value', val.eMail);
@@ -202,6 +214,17 @@ function ClickButtonContacts(event) {
                 contactsInputs.style.display = 'none';
                 body.append(contactsInputs);
 
+                // var contactsInputs = document.createElement('div');
+                // contactsInputs.setAttribute('class', 'deleteContacts');
+                // contactsInputs.setAttribute('ID', 'z-' + divIndex);
+                // contactsInputs.setAttribute('style', 'visibility: hidden; opacity: 0;');
+                // body.append(contactsInputs);
+
+                // var contactsInputs = document.createElement('button');
+                // contactsInputs.setAttribute('class', 'deleteContacts__deleteContactsButton');
+                // contactsInputs.setAttribute('ID', 'h-' + divIndex);
+                // contactsInputs.setAttribute('style', 'visibility: hidden; opacity: 0;');
+                // body.append(contactsInputs);
 
                 var contactsInputs = document.createElement('div');
                 contactsInputs.setAttribute('ID', 'd-' + divIndex);
@@ -305,21 +328,6 @@ function ClickButtonContacts(event) {
         }); // Photo Button Change Event
 
 
-        function writeLocalStorage(localResponse) {
-
-            localStorage.setItem('myStorage', JSON.stringify(localResponse));
-
-        } // Save Array To Local Storage
-
-
-        function readLocalStorage() {
-
-            var localResponse = JSON.parse(localStorage.getItem('myStorage'));
-            return localResponse;
-
-        } // Load Array From Local Storage
-
-
         function showFormBtns(){
 
             signInFormByName.getElementsByTagName('input')[1].classList.remove('contactFormIn__lastName-unactive');
@@ -338,6 +346,7 @@ function ClickButtonContacts(event) {
 
         }
 
+
         function clearInputs(){
             window.idAdressContacts = null;
             signInFormByName.getElementsByTagName('input')[0].value = '';
@@ -353,7 +362,7 @@ function ClickButtonContacts(event) {
 
             console.log('input is changed');
 
-            if (signInFormByName.getElementsByTagName('input')[0].value.trim() != '') { // Строка содержит не пробелы
+            if (signInFormByName.getElementsByTagName('input')[0].value.trim() != '') { // Строка содержит не только пробелы
                 showFormBtns();
 
                 let fNameValue = signInFormByName.getElementsByTagName('input')[0].value;
@@ -399,25 +408,18 @@ function ClickButtonContacts(event) {
 
                     } // поиск по символам Имени
 
-
-
                 });
                 console.log(window.idAdressContacts);
                 if (!abonentPresent) {
                     document.getElementsByClassName('contacts')[0].innerHTML = '';
                 }
 
-            } // Строка содержит не пробелы
+            } // Строка содержит не только пробелы
             else{
                 window.idAdressContacts = null;
                 signInFormByName.getElementsByTagName('input')[0].value = ''; // валидация строки, состоящей из пробелов
                 viewContacts(window.contacts);
             }
-
-            // if (idAdressSmall=0) {
-            //     idAdressContacts.splice(1, 1);
-            //     window.idAdressContacts = idAdressContacts;
-            // }
 
             console.log('поиск по первым символам: ', i);
 
