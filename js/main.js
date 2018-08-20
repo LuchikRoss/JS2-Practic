@@ -476,7 +476,6 @@ function ClickButtonContacts(event) {
 
         console.log('document ready');
 
-
     } // DOM Loaded
 
     window.load = function () {
@@ -485,3 +484,30 @@ function ClickButtonContacts(event) {
 
 })();
 
+
+function footerClick() {
+
+    /**
+     * Request default
+     */
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'js/contacts.json', true);
+
+    xhr.onload = function () {
+
+        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+
+            response = JSON.parse(xhr.response);
+
+            localStorage.setItem('myStorage', JSON.stringify(response.contacts)); // Save Array To Local Storage
+            console.log('set storage to default', response.contacts);
+        }
+
+    };
+
+    xhr.send();
+
+    window.location.reload();
+
+} // Set To Default Local Storage (On Demand)
